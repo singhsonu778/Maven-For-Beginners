@@ -1,0 +1,113 @@
+Maven is a project management and comprehension tool.
+Maven simplifies and standardizes the project build process.
+
+Maven is Java based tool, so the very first requirement is to have JDK installed on your machine.
+Also, maven needs explicit "JAVA_HOME" in enviroment variable to be set. Only path to java in "PATH" is not sufficient.
+
+Extract maven zip file to "C:\My Programs\apache-maven-3.3.9" and set "C:\My Programs\apache-maven-3.3.9\bin" in "PATH" variable. Run "mvn -v" to verify.
+
+All POMs inherit from a parent POM known as Super POM, and contains values inherited by default. Maven use the effective pom (configuration from super pom plus project configuration) to execute relevant goal.
+Run "mvn help:effective-pom" to see the effective pom.
+Also you can send the output to some file as "mvn help:effective-pom > super-pom.xml"
+
+Lifecycle, phases and goals: 
+	-A build life cycle consists of a sequence of build phases, and each build phase consists of a sequence of goals. 
+	-If a life cycle is requested executed, all build phases in that life cycle are executed. 
+	-If a build phase is requested executed, all build phases before it in the pre-defined sequence of build phases are executed too.
+	-You cannot execute the default life cycle directly. You have to specify a build phase or goal inside the default life cycle
+	-A goal can be bound to one or more build phases, or to none at all. 
+	-If a goal is not bound to any build phase, you can only execute it by passing the goals name to the mvn command. 
+	-If a goal is bound to multiple build phases, that goal will get executed during each of the build phases it is bound to.
+
+Maven has following three standard lifecycles:
+	-clean
+	-default(or build)
+	-site
+	
+Clean lifecycle conisit of following 3 phases:
+	-pre-clean
+	-clean
+	-post-clean
+	
+Default (or Build) lifecycle consist of following 23 phases:
+	-validate
+	-initialize
+	
+	-generate-sources
+	-process-sources
+	
+	-generate-resources
+	-process-resources
+	
+	-compile
+	-process-classes
+	
+	-generate-test-sources
+	-process-test-sources
+	
+	-test-compile
+	-process-test-classes
+	
+	-test
+	
+	-prepare-package
+	-package
+	
+	-pre-integration-test
+	-integration-test
+	-post-integration-test
+	
+	-verify
+	-install
+	-deploy
+	
+Site lifecycle conisit of following 3 phases:
+	-pre-site
+	-site
+	-post-site
+	-site-deploy
+	
+Maven repository are of 3 types:
+	-local: It gets created when you run any maven command for the first time. By default it gets created in %USER_HOME% directory. To override the default location, mention another path in settings.xml file available at %M2_HOME%\conf directory.
+	
+	-central: It is provided by Maven community. It is not required to be configured. When Maven does not find any dependency in local repository, it starts searching in central repository using following url http://repo1.maven.org/maven2/
+	
+	-remote: It is developer's own repository containing required libraries or other project jars. If dependency is not found in local and central repository and if remote repository is specified in pom then it seraches in remote repository.
+	
+Maven Plugin: 
+	-A plugin generally provides a set of goals and which can be executed using following syntax: "mvn [plugin-name]:[goal-name]"
+
+	-There are 2 types of plugins: 
+		-build plugins : executed during build and is configured in <build/> element of pom.xml
+		-reporting plugins : executed during site generation and is configured in <reporting/> element of pom.xml
+
+Creating a simple java project:		
+	-Maven uses archetype plugins to create projects. Run the following command to create a java project mvn archetype:generate "-DgroupId=com.sonu.maven" "-DartifactId=simpleJavaApp" "-DarchetypeArtifactId=maven-archetype-quickstart" "-DinteractiveMode=false"
+	(You need double quotes (") if using windows)
+	-To create maven based web project change archetypeArtifactId to maven-archetype-webapp
+
+There are 3 places where configuration can be specified:	
+	-at global level "C:\My Programs\apache-maven-3.3.9\conf\settings.xml"
+	-at user level "C:\Users\Sonu\.m2\settings.xml"
+	-at project level in "pom.xml"
+	
+External dependency not on any repository but located in project lib folder:
+	<dependency>
+         <groupId>com.sonu.maven</groupId>
+         <artifactId>sampleProject</artifactId>
+         <scope>system</scope>
+         <version>1.0</version>
+         <systemPath>${basedir}\src\lib\sampleProject.jar</systemPath>
+    </dependency>
+	
+SNAPSHOT vs specific version:
+	-In case of specific version, if dependecy is found it is not downloaded, same is used
+	-In case of SNAPSHOT version, everytime build is run current dependency is fetched. It is useful for projects undergoing rapid changes and being used by some other projects
+	
+Referencing a property defined in pom.xml:
+	-The property name uses the names of the XML elements that define the value, with "pom" being allowed as an alias for the project (root) element.
+	-So ${pom.name} refers to the name of the project, ${pom.version} refers to the version of the project, ${pom.build.finalName} refers to the final name of the file created when the built project is packaged.
+	
+-deploying on local/repo	
+-creating your own maven repo
+
