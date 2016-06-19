@@ -14,6 +14,13 @@
          <version>3.8.1</version>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <groupId>com.sonu.maven</groupId>
+         <artifactId>simple</artifactId>
+         <scope>system</scope>
+         <version>1.0</version>
+         <systemPath>${basedir}\lib\simple-1.0.jar</systemPath>
+      </dependency>
    </dependencies>
    <build>
       <plugins>
