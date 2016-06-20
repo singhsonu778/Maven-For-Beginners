@@ -19,9 +19,6 @@
       </dependency>
    </dependencies>
    <build>
-	  <filters>
-	     <filter>src/main/external-resources/external.properties</filter>
-	  </filters>
       <resources>
          <resource>
             <directory>src/main/resources</directory>
@@ -29,4 +26,7 @@
          </resource>
       </resources>
    </build>
+   <properties>
+      <my.external.name>Sonu</my.external.name>
+   </properties>
 </project>
