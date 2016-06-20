@@ -19,6 +19,9 @@
       </dependency>
    </dependencies>
    <build>
+	  <filters>
+	     <filter>src/main/external-resources/external.properties</filter>
+	  </filters>
       <resources>
          <resource>
             <directory>src/main/resources</directory>
