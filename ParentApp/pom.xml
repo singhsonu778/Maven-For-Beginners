@@ -6,6 +6,10 @@
    <packaging>pom</packaging>
    <version>1.0</version>
    <name>ParentApp</name>
+   <modules>
+      <module>Child1</module>
+      <module>Child2</module>
+   </modules>
    <dependencies>
       <dependency>
          <groupId>junit</groupId>
