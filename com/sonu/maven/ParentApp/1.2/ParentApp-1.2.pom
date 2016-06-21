@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.sonu.maven</groupId>
+   <artifactId>ParentApp</artifactId>
+   <packaging>jar</packaging>
+   <version>1.2</version>
+   <name>ParentApp</name>
+   <properties>
+      <!-- 
+         add following code in your settings.xml 
+			  <servers>
+	             <server>
+	                <id>github</id>
+	                <username>github-username</username>
+			        <password>github-password</password>
+	             </server> 
+	          </servers>             
+      -->
+      <github.global.server>github</github.global.server>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>3.8.1</version>
+      </dependency>
+   </dependencies>
+   <distributionManagement>
+      <repository>
+         <id>internal.repo</id>
+         <name>Internal Temporary Repository</name>
+         <url>file://${project.build.directory}/mvn-repo</url>
+      </repository>
+   </distributionManagement>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>2.8.2</version>
+            <configuration>
+               <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>com.github.github</groupId>
+            <artifactId>site-maven-plugin</artifactId>
+            <version>0.10</version>
+            <configuration>
+               <!-- git commit message -->
+               <message>Maven artifacts for ${project.version}</message>
+               <!-- disable webpage processing -->
+               <noJekyll>true</noJekyll>
+               <!-- matches distribution management repository url above -->
+               <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+               <!-- create a branch "mvn-repo" on github -->
+               <branch>refs/heads/mvn-repo</branch>
+               <!-- If you remove this then the old artifact will be removed and new one will replace.
+                    But with the merge tag you can just release by changing the version -->
+               <merge>true</merge>
+               <includes>
+                  <include>**/*</include>
+               </includes>
+               <!-- github repo name -->
+               <repositoryName>Maven-For-Beginners</repositoryName>
+               <!-- github username -->
+               <repositoryOwner>singhsonu778</repositoryOwner>
+            </configuration>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>site</goal>
+                  </goals>
+                  <phase>deploy</phase>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>
