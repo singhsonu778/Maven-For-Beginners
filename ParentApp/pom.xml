@@ -3,13 +3,9 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>com.sonu.maven</groupId>
    <artifactId>ParentApp</artifactId>
-   <packaging>pom</packaging>
-   <version>1.1</version>
+   <packaging>jar</packaging>
+   <version>1.2</version>
    <name>ParentApp</name>
-   <modules>
-      <module>Child1</module>
-      <module>Child2</module>
-   </modules>
    <properties>
       <!-- 
          add following code in your settings.xml 

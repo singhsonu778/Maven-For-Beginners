@@ -9,13 +9,8 @@
    <dependencies>
       <dependency>
          <groupId>com.sonu.maven</groupId>
-         <artifactId>Child1</artifactId>
-         <version>1.0</version>
-      </dependency>
-      <dependency>
-         <groupId>com.sonu.maven</groupId>
-         <artifactId>Child2</artifactId>
-         <version>1.0</version>
+         <artifactId>ParentApp</artifactId>
+         <version>1.2</version>  
       </dependency>
    </dependencies>
    <build>
@@ -29,4 +24,14 @@
    <properties>
       <my.external.name>Sonu</my.external.name>
    </properties>
+   <repositories>
+      <repository>
+         <id>Maven-For-Beginners-mvn-repo</id>
+         <url>https://raw.github.com/singhsonu778/Maven-For-Beginners/mvn-repo/</url>
+         <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+         </snapshots>
+      </repository>
+   </repositories>
 </project>
